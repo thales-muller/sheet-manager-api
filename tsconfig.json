@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", // Target modern JavaScript features
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "./dist", // Output directory for compiled files
+    "rootDir": "./src", // Source files location
+    "strict": true, // Enable strict type-checking
+    "esModuleInterop": true, // Import compatibility between CommonJS and ES Modules
+    "declaration": true,
+    "experimentalDecorators": true, // Enable decorators
+    // remove these lines if you are not using typeorm
+    "emitDecoratorMetadata": true, // Required for MikroORM decorators
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true
+  }
+}
