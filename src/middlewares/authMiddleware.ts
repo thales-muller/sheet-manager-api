@@ -8,13 +8,15 @@ const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
 export default function authMiddleware(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    return res.status(401).json({ message: 'Authorization header missing' });
+    res.status(401).json({ message: 'Authorization header missing' });
+    return;
   }
 
   // Expect the header to have the format "Bearer token"
   const token = authHeader.split(' ')[1];
   if (!token) {
-    return res.status(401).json({ message: 'Token missing' });
+    res.status(401).json({ message: 'Token missing' });
+    return;
   }
 
   try {
@@ -24,6 +26,7 @@ export default function authMiddleware(req: Request, res: Response, next: NextFu
     (req as any).user = decoded;
     next();
   } catch (error) {
-    return res.status(401).json({ message: 'Invalid token' });
+    res.status(401).json({ message: 'Invalid token' });
+    return;
   }
 }

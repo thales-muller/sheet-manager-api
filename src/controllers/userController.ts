@@ -33,7 +33,8 @@ export async function getUserById(req: Request, res: Response) {
   const user = await userRepo.findOne({ id: parseInt(req.params.id) });
 
   if (!user) {
-    return res.status(404).json({ message: 'User not found' });
+    res.status(404).json({ message: 'User not found' });
+    return;
   }
   res.json(user);
 }
@@ -45,7 +46,8 @@ export async function updateUser(req: Request, res: Response) {
   const user = await userRepo.findOne({ id: parseInt(req.params.id) });
 
   if (!user) {
-    return res.status(404).json({ message: 'User not found' });
+    res.status(404).json({ message: 'User not found' });
+    return;
   }
 
   const { username, email, password } = req.body;
@@ -66,7 +68,8 @@ export async function deleteUser(req: Request, res: Response) {
   const user = await userRepo.findOne({ id: parseInt(req.params.id) });
 
   if (!user) {
-    return res.status(404).json({ message: 'User not found' });
+    res.status(404).json({ message: 'User not found' });
+    return;
   }
   
   await orm.em.removeAndFlush(user);
